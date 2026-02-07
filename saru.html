@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Saru 🌹</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #fff0f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Login Screen Styles */
+        #login-screen {
+            text-align: center;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 75, 110, 0.2);
+            z-index: 10;
+            width: 300px;
+        }
+
+        h2 { color: #ff4d6d; font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin-bottom: 20px; }
+        
+        input {
+            display: block;
+            margin: 15px auto;
+            padding: 12px;
+            width: 90%;
+            border: 2px solid #ffccd5;
+            border-radius: 12px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: #ff4d6d; }
+
+        button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover { background: #c9184a; transform: scale(1.05); }
+
+        /* Rose Selection Screen */
+        #rose-selection {
+            display: none;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .rose-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .rose-btn {
+            font-size: 60px;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
+
+        .rose-btn:hover { transform: scale(1.4) rotate(15deg); }
+
+        /* Final Message Screen */
+        #final-message {
+            display: none;
+            text-align: center;
+            max-width: 85%;
+            z-index: 10;
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 30px;
+            border: 4px solid #ff4d6d;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .main-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #ff4d6d;
+            margin-bottom: 20px;
+        }
+
+        p { color: #5a182a; line-height: 1.6; font-size: 1.1rem; }
+
+        /* Background Hearts Animation */
+        .heart {
+            position: absolute;
+            color: #ffb3c1;
+            font-size: 20px;
+            pointer-events: none;
+            animation: float 5s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <h2>Hi Beautiful! ❤️</h2>
+        <input type="text" id="name" placeholder="Enter Your Name (Saru)">
+        <input type="password" id="pass" placeholder="Password (010515)">
+        <button onclick="checkLogin()">Unlock My Heart</button>
+        <p id="error" style="color: #ff4d6d; font-size: 13px; display: none; margin-top: 10px;">Only Saru can enter here! 😉</p>
+    </div>
+
+    <div id="rose-selection">
+        <h2 style="font-size: 2.5rem;">Pick a rose, Saru... 🌹</h2>
+        <div class="rose-container">
+            <div class="rose-btn" onclick="showWish()">🌹</div>
+            <div class="rose-btn" onclick="showWish()">🌷</div>
+            <div class="rose-btn" onclick="showWish()">🌹</div>
+        </div>
+    </div>
+
+    <div id="final-message">
+        <div class="message-card">
+            <h1 class="main-text">Happy Rose Day, Saru! 🌹</h1>
+            <p>Every rose has a story, but mine is my favorite because it has <b>you</b> in it.</p>
+            <p>You are the most beautiful flower in my life, and I'm so lucky to have you. May our love bloom forever!</p>
+            <p style="font-size: 1.8rem; margin-top: 20px;">❤️ I Love You! ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        function checkLogin() {
+            const nameInput = document.getElementById('name').value.trim().toLowerCase();
+            const passInput = document.getElementById('pass').value.trim();
+
+            // Password & Name check
+            if(nameInput === 'saru' && passInput === '010515') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('rose-selection').style.display = 'block';
+                startHeartRain();
+            } else {
+                const error = document.getElementById('error');
+                error.style.display = 'block';
+                error.style.animation = 'shake 0.2s ease-in-out 0s 2';
+            }
+        }
+
+        function showWish() {
+            document.getElementById('rose-selection').style.display = 'none';
+            document.getElementById('final-message').style.display = 'block';
+        }
+
+        function startHeartRain() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
+
